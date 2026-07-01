@@ -1,0 +1,147 @@
+# =========================
+# Python cache
+# =========================
+__pycache__/
+*/__pycache__/
+*.py[cod]
+*$py.class
+
+
+# =========================
+# Virtual environments
+# =========================
+.venv/
+venv/
+env/
+ENV/
+video_env/
+conda_env/
+
+
+# =========================
+# Environment variables / secrets
+# =========================
+.env
+.env.*
+!.env.example
+
+
+# =========================
+# IDE / editor files
+# =========================
+.vscode/
+.idea/
+*.code-workspace
+
+
+# =========================
+# OS system files
+# =========================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+
+# =========================
+# Logs / runtime files
+# =========================
+*.log
+logs/
+*.tmp
+*.temp
+*.bak
+
+
+# =========================
+# Jupyter
+# =========================
+.ipynb_checkpoints/
+
+
+# =========================
+# Python build / package files
+# =========================
+build/
+dist/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+
+# =========================
+# Test / coverage cache
+# =========================
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.mypy_cache/
+.ruff_cache/
+
+
+# =========================
+# Large data files
+# Keep small sample data manually if needed
+# =========================
+sourcecode/data/raw/
+sourcecode/data/raw_data/
+sourcecode/data/datasets/
+sourcecode/data/videos/
+sourcecode/data/images/
+sourcecode/data/frames/
+sourcecode/data/features/
+sourcecode/data/cache/
+sourcecode/data/indexes/
+
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.webm
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.7z
+
+
+# =========================
+# Model / embedding / index files
+# =========================
+*.pt
+*.pth
+*.ckpt
+*.bin
+*.safetensors
+*.onnx
+*.pkl
+*.pickle
+*.npy
+*.npz
+*.faiss
+*.index
+
+
+# =========================
+# Optional: generated output files
+# I recommend keeping your final json/md results,
+# so do NOT ignore outputs/ entirely.
+# Only ignore temporary output files.
+# =========================
+outputs/tmp/
+outputs/cache/
+outputs/*.log
+
+
+# =========================
+# Word temporary files
+# Keep final report.docx, ignore temp Word files
+# =========================
+~$*.docx
+*.asd
+
+
+# =========================
+# Mac / Office temp files
+# =========================
+.~lock.*

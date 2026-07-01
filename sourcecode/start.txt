@@ -1,0 +1,3 @@
+cd E:\UQ\26S1\INFS4205\AASS\S4908526_YUE_ZHAO\sourcecode
+python app.py
+http://127.0.0.1:5000

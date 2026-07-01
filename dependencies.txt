@@ -1,0 +1,20 @@
+# INFS4205/7205 A3 Personalised Multimodal Study Agent
+# Dependencies for the Flask web app, multimodal PDF indexing,
+# hybrid retrieval, LangGraph orchestration, and evaluation utilities.
+
+# Web backend
+Flask>=3.0
+
+# Agent workflow orchestration
+langgraph>=1.0
+langchain>=0.3
+
+# Vector retrieval backend
+faiss-cpu>=1.8
+numpy>=1.24
+
+# PDF text extraction
+pypdf>=5.0
+
+# PDF page rendering / slide image extraction
+PyMuPDF>=1.24

@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>INFS4205 Study Agent</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="nav-rail" aria-label="Workspace navigation">
+        <div class="brand-mark">IA</div>
+        <button class="nav-button" id="newChatBtn" title="New chat">New</button>
+        <button class="nav-button active" data-view="chat" title="Chat">Chat</button>
+        <button class="nav-button" data-view="history" title="History">History</button>
+        <button class="nav-button" data-view="library" title="Knowledge base">Library</button>
+        <button class="nav-button" data-view="evaluation" title="Evaluation">Eval</button>
+        <button class="nav-button" data-view="profile" title="Profile">Profile</button>
+      </aside>
+
+      <main class="main-stage">
+        <header class="app-header">
+          <div>
+            <p class="eyebrow">INFS4205/7205 A3</p>
+            <h1>Personalised Multimodal Study Agent</h1>
+          </div>
+          <div class="status-strip" aria-live="polite">
+            <span><strong id="docCount">0</strong> docs</span>
+            <span><strong id="chunkCount">0</strong> evidence</span>
+            <span><strong id="frameworkName">Agent</strong></span>
+            <span><strong id="modelName">LLM</strong></span>
+            <button id="sessionSummaryBtn" class="summary-button">Summarise session</button>
+          </div>
+        </header>
+
+        <section class="view-panel active" id="chatView">
+          <div id="chatLog" class="chat-log"></div>
+          <div class="quick-tools" aria-label="Answer format">
+            <button class="mode-button active" data-mode="">General</button>
+            <button class="mode-button" data-mode="summary">Summary</button>
+            <button class="mode-button" data-mode="plan">Plan</button>
+            <button class="mode-button" data-mode="slides">Slides</button>
+            <button class="mode-button" data-mode="practice">Practice</button>
+          </div>
+          <form id="chatForm" class="composer">
+            <input id="fileInput" name="files" type="file" multiple accept=".pdf,.txt,.md,.csv,.png,.jpg,.jpeg,.webp" hidden />
+            <div id="attachmentTray" class="attachment-tray" hidden></div>
+            <button type="button" class="tool-button" id="attachBtn" title="Attach files">+</button>
+            <textarea id="queryInput" rows="1" placeholder="Message Study Agent..."></textarea>
+            <button type="submit" class="send-button" title="Send">Send</button>
+          </form>
+          <div id="uploadResult" class="upload-toast" aria-live="polite"></div>
+        </section>
+
+        <section class="view-panel" id="historyView">
+          <div class="section-heading">
+            <div>
+              <h2>Chat History</h2>
+              <p>Resume a previous learning thread or delete an old chat.</p>
+            </div>
+            <button id="refreshHistoryBtn">Refresh</button>
+          </div>
+          <div id="historyList" class="history-list"></div>
+        </section>
+
+        <section class="view-panel" id="libraryView">
+          <div class="section-heading">
+            <div>
+              <h2>Knowledge Base</h2>
+              <p>Manage uploaded lecture PDFs, slide images, notes, and indexed multimodal evidence.</p>
+            </div>
+            <div class="inline-actions">
+              <button id="libraryUploadBtn">Upload</button>
+              <button id="refreshDocsBtn">Refresh</button>
+            </div>
+          </div>
+          <div id="indexesList" class="indexes-list"></div>
+          <div id="documentsList" class="documents-list"></div>
+        </section>
+
+        <section class="view-panel" id="evaluationView">
+          <div class="section-heading">
+            <div>
+              <h2>Evaluation</h2>
+              <p>Run the benchmark used for the report: baselines, ablations, retrieval quality, and latency.</p>
+            </div>
+            <button id="runEvalBtn">Run benchmark</button>
+          </div>
+          <div id="evaluationPanel" class="evaluation-panel"></div>
+        </section>
+
+        <section class="view-panel" id="profileView">
+          <div class="section-heading">
+            <div>
+              <h2>Personalisation</h2>
+              <p>These settings guide language, depth, revision planning, and memory updates.</p>
+            </div>
+            <button id="saveProfileBtn">Save</button>
+          </div>
+          <div class="profile-grid">
+            <label>Name<input id="userName" autocomplete="name" /></label>
+            <label>Course<input id="course" /></label>
+            <label>Language<select id="language"><option>Chinese-English mixed</option><option>English</option><option>Chinese</option></select></label>
+            <label>Daily minutes<input id="dailyMinutes" type="number" min="15" max="480" step="15" /></label>
+            <label class="wide">Answer style<textarea id="answerStyle" rows="3"></textarea></label>
+            <label class="wide">Current goal<textarea id="goal" rows="2"></textarea></label>
+            <label class="wide">Weak topics<textarea id="weakTopics" rows="5" placeholder="One topic per line"></textarea></label>
+          </div>
+        </section>
+      </main>
+
+      <div class="resize-handle" id="resizeHandle" title="Drag to resize"></div>
+
+      <aside class="details-panel" aria-label="Evidence and agent details">
+        <div class="details-tabs">
+          <button class="tab-button active" data-tab="evidence">Evidence</button>
+          <button class="tab-button" data-tab="trace">Debug</button>
+          <button class="tab-button" data-tab="branch">Branch</button>
+        </div>
+        <section class="tab-panel active" id="evidenceTab">
+          <div id="evidenceList" class="evidence-list"></div>
+        </section>
+        <section class="tab-panel" id="traceTab">
+          <ol id="traceList" class="trace-list"></ol>
+        </section>
+        <section class="tab-panel" id="branchTab">
+          <div id="memoryPanel" class="memory-panel"></div>
+          <div class="branch-help">
+            <strong>Branch records</strong>
+            <p>Select a record to jump to its paragraph. Use Expand to read the branch Q&A here.</p>
+          </div>
+          <div id="branchRecords" class="branch-records"></div>
+          <div id="branchRefs" class="branch-refs"></div>
+          <form id="branchQuestionForm" class="branch-question-form">
+            <textarea id="branchQuestionInput" rows="3" placeholder="Ask using the selected branch references..."></textarea>
+            <button type="submit">Ask branch</button>
+          </form>
+        </section>
+      </aside>
+    </div>
+
+    <div class="modal-backdrop" id="slideModal" hidden>
+      <div class="modal-card">
+        <button class="modal-close" id="closeModalBtn">Close</button>
+        <button class="modal-nav modal-prev" id="prevSlideBtn">&lt;</button>
+        <img id="modalImage" alt="Slide preview" />
+        <button class="modal-nav modal-next" id="nextSlideBtn">&gt;</button>
+        <div id="modalCaption"></div>
+      </div>
+    </div>
+
+    <script src="/static/app.js?v=image-routing-3"></script>
+  </body>
+</html>
