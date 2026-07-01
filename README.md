@@ -1,4 +1,4 @@
-# INFS4205/7205 A3 Personalised Multimodal Study Agent
+# Personalised Multimodal Study Agent
 
 This repository contains a personalised multimodal agent system for INFS4205/7205 Assignment 3. The system builds a course-specific knowledge base from lecture PDFs and notes, indexes both slide text and rendered slide images, retrieves grounded evidence, and uses a LangGraph workflow to answer questions, find slides, generate revision plans, support branch follow-up questions, and run quantitative ablation evaluation.
 
