@@ -1,9 +1,0 @@
-mode,mean_recall_at_k,mean_page_recall_at_k,mean_mrr,mean_answer_success_proxy,mean_latency_ms
-plain_llm,0.0,0.0,0.0,0.025,0.0
-text_only,0.631,0.74,0.893,0.631,150.5
-caption_only,0.681,0.74,0.893,0.681,127.2
-no_visual,0.681,0.74,0.893,0.681,131.0
-no_router,0.681,0.74,0.893,0.681,153.0
-no_rerank,0.681,0.74,0.893,0.681,150.4
-no_memory,0.681,0.74,0.893,0.681,155.8
-final_agent,0.681,0.74,0.893,0.681,132.0
